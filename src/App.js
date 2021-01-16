@@ -18,58 +18,58 @@ import api from './services/api'
 
 function App(){
     
-    const [projects, setProjects] = useState([])
+    const [repositories, setRepositories] = useState([])
     
     useEffect(() => {
-        api.get('projects').then(response=>{
-            setProjects(response.data)
+        api.get('repositories').then(response=>{
+            setRepositories(response.data)
         })    
     },[])
 
-    async function handleAddProject() {
+    async function handleAddRepository() {
         //projects.push(`Novo projeto ${Date.now()}`)
         //setProjects([...projects, `Novo projeto ${Date.now()}`])
         
-        const response = await api.post('projects', {
-            title: `Novo projeto ${Date.now()}`,
+        const response = await api.post('repositories', {
+            title: `Novo repositorio ${Date.now()}`,
             url: "https://github.com/gustavonvp/DesafioNodeJs",
             techs: "NodeJS, React e React Native",
             likes: 3
         })
 
-        const project = response.data
+        const repository = response.data
 
-        setProjects([...projects, project])
+        setRepositories([...repositories, repository])
         
     }
 
-    async function handleDeleteProject(id) {
-        await api.delete(`projects/${id}`);
+    async function handleRemoveRepository(id) {
+        await api.delete(`repository/${id}`);
         
-        setProjects(projects.filter(
-            project => project.id !== id
+        setRepositories(repositories.filter(
+            repositories => repository.id !== id
         ))
     
     }
 
     return (
 <>
-    <Header title="Projects"></Header>
+    <Header title="Repository"></Header>
         
         <img width="300" src={backgroundImage} ></img>
         
         <ul data-testid="repository-list">
-            {projects.map(project => 
-                <li key={project.id}>{project.title}
+            {repositories.map(repository => 
+                <li key={repository.id}>{repository.title}
                     
-                    <button type="button" onClick={() => handleDeleteProject(project.id)}>Remover Projeto</button>
+                    <button type="button" onClick={() => handleRemoveRepository(project.id)}>Remover Repositorio</button>
         
                 </li>
             )}  
         </ul>
 
 
-        <button type="button" onClick={handleAddProject}>Adicionar projeto</button>
+        <button type="button" onClick={handleAddRepository}>Adicionar Repositorio</button>
 </>
 )
 

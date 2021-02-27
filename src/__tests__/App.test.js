@@ -32,7 +32,7 @@ describe("App component", () => {
 
     await actWait();
 
-    fireEvent.click(getByText("Adicionar projeto"));
+    fireEvent.click(getByText("Adicionar"));
 
     await actWait();
 
@@ -57,7 +57,7 @@ describe("App component", () => {
 
     await actWait();
 
-    fireEvent.click(getByText("Remover Projeto"));
+    fireEvent.click(getByText("Remover"));
 
     await actWait();
 
